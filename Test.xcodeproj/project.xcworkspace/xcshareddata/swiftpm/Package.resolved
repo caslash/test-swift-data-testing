@@ -1,0 +1,24 @@
+{
+  "originHash" : "e68ba6af57ba435d87f3cfaaee9a5cf409afa105776c22b4ac2f1db7dc44698e",
+  "pins" : [
+    {
+      "identity" : "factory",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Factory",
+      "state" : {
+        "branch" : "swift6",
+        "revision" : "4291e4a358826394c98052ea23879e04ada8f24c"
+      }
+    },
+    {
+      "identity" : "fakery",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vadymmarkov/Fakery",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f68f2ceaaf6782db234e4cbcd5f06dbeeb91af7e"
+      }
+    }
+  ],
+  "version" : 3
+}
