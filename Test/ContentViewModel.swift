@@ -17,25 +17,15 @@ public class ContentViewModel {
     
     public var people: [Person] { return swiftDataService.people }
     
-    public var multiSelection: Set<Person.ID> = .init()
-    
-    public var requestSuccessful: Bool?
-    
     public init() { }
     
     public func addPerson(completion: (_ success: Bool) -> Void) {
         completion(self.swiftDataService.addPerson(Person(name: self.faker.name.name(), age: self.faker.number.randomInt(min: 18, max: 50))))
     }
     
-    public func deletePerson(at indexSet: IndexSet) {
+    public func deletePerson(at indexSet: IndexSet, completion: (_ success: Bool) -> Void) {
         for index in indexSet {
-            self.requestSuccessful = self.swiftDataService.deletePerson(self.people[index])
-        }
-    }
-    
-    public func deleteSelection() {
-        for id in multiSelection {
-            self.requestSuccessful = self.swiftDataService.deletePersonById(id)
+            completion(self.swiftDataService.deletePerson(self.people[index]))
         }
     }
 }

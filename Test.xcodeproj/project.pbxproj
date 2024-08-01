@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		68F24B6E2C5BFEEB00497359 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 68F24B6D2C5BFEEB00497359 /* Factory */; };
 		68F24B7B2C5C0C2400497359 /* Fakery in Frameworks */ = {isa = PBXBuildFile; productRef = 68F24B7A2C5C0C2400497359 /* Fakery */; };
+		68F24B7E2C5C16D500497359 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 68F24B7D2C5C16D500497359 /* AlertToast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F24B7E2C5C16D500497359 /* AlertToast in Frameworks */,
 				68F24B7B2C5C0C2400497359 /* Fakery in Frameworks */,
 				68F24B6E2C5BFEEB00497359 /* Factory in Frameworks */,
 			);
@@ -70,6 +72,7 @@
 			packageProductDependencies = (
 				68F24B6D2C5BFEEB00497359 /* Factory */,
 				68F24B7A2C5C0C2400497359 /* Fakery */,
+				68F24B7D2C5C16D500497359 /* AlertToast */,
 			);
 			productName = Test;
 			productReference = 68F24B5A2C5BFB3800497359 /* Test.app */;
@@ -102,6 +105,7 @@
 			packageReferences = (
 				68F24B6C2C5BFEEB00497359 /* XCRemoteSwiftPackageReference "Factory" */,
 				68F24B792C5C0C2400497359 /* XCRemoteSwiftPackageReference "Fakery" */,
+				68F24B7C2C5C16D500497359 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 68F24B5B2C5BFB3800497359 /* Products */;
 			projectDirPath = "";
@@ -367,6 +371,14 @@
 				kind = branch;
 			};
 		};
+		68F24B7C2C5C16D500497359 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -379,6 +391,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 68F24B792C5C0C2400497359 /* XCRemoteSwiftPackageReference "Fakery" */;
 			productName = Fakery;
+		};
+		68F24B7D2C5C16D500497359 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68F24B7C2C5C16D500497359 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
