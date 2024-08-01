@@ -12,6 +12,9 @@ import Observation
 public protocol ISwiftDataService {
     var people: [Person] { get }
     
+    init()
+    init(modelContext: ModelContext)
+    
     func fetchPeople()
     func addPerson(_ person: Person) -> Bool
     func updatePerson(_ person: Person) -> Bool
@@ -21,11 +24,17 @@ public protocol ISwiftDataService {
 
 @Observable
 public class SwiftDataService: ISwiftDataService {
-    private let modelContext: ModelContext = try! ModelContext(ModelContainer(for: Person.self))
+    private let modelContext: ModelContext
     
     public var people: [Person] = []
     
-    public init() {
+    public required init() {
+        self.modelContext = try! ModelContext(ModelContainer(for: Person.self))
+        self.fetchPeople()
+    }
+    
+    public required init(modelContext: ModelContext) {
+        self.modelContext = modelContext
         self.fetchPeople()
     }
     
@@ -72,7 +81,7 @@ public class SwiftDataService: ISwiftDataService {
     
     public func deletePersonById(_ id: Person.ID) -> Bool {
         do {
-            var person = try self.modelContext.fetch(FetchDescriptor<Person>(predicate: #Predicate { $0.id == id })).first
+            let person = try self.modelContext.fetch(FetchDescriptor<Person>(predicate: #Predicate { $0.id == id })).first
             if let person {
                 return self.deletePerson(person)
             }

@@ -13,7 +13,7 @@ struct ContentView: View {
     
     @State private var showToast: Bool = false
     @State private var toastTitle: String?
-    @State private var successfulToast: Bool = false
+    @State private var successfulToast: Bool?
     
     var body: some View {
         NavigationStack {
@@ -48,7 +48,10 @@ struct ContentView: View {
             }
         }
         .toast(isPresenting: $showToast, duration: 2, tapToDismiss: true) {
-            AlertToast(displayMode: .hud, type: self.successfulToast ? .complete(.green) : .error(.red), title: self.toastTitle)
+            AlertToast(displayMode: .hud, type: self.successfulToast ?? false ? .complete(.green) : .error(.red), title: self.toastTitle)
+        } completion: {
+            self.toastTitle = nil
+            self.successfulToast = false
         }
     }
 }
