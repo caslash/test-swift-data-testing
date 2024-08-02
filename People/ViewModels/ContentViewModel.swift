@@ -19,6 +19,10 @@ public class ContentViewModel {
     
     public init() { }
     
+    public func addPerson(_ person: Person, completion: (_ success: Bool) -> Void) {
+        completion(self.swiftDataService.addPerson(person))
+    }
+    
     public func addPerson(completion: (_ success: Bool) -> Void) {
         completion(self.swiftDataService.addPerson(Person(name: self.faker.name.name(), age: self.faker.number.randomInt(min: 18, max: 50))))
     }
@@ -27,5 +31,9 @@ public class ContentViewModel {
         for index in indexSet {
             completion(self.swiftDataService.deletePerson(self.people[index]))
         }
+    }
+    
+    public func deletePerson(_ person: Person, completion: (_ success: Bool) -> Void) {
+        completion(self.swiftDataService.deletePerson(person))
     }
 }

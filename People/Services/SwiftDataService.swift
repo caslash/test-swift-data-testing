@@ -19,7 +19,6 @@ public protocol ISwiftDataService {
     func addPerson(_ person: Person) -> Bool
     func updatePerson(_ person: Person) -> Bool
     func deletePerson(_ person: Person) -> Bool
-    func deletePersonById(_ id: Person.ID) -> Bool
 }
 
 @Observable
@@ -75,19 +74,6 @@ public class SwiftDataService: ISwiftDataService {
             return true
         } catch {
             print("Failed to delete \(person.name): \(error.localizedDescription)")
-            return false
-        }
-    }
-    
-    public func deletePersonById(_ id: Person.ID) -> Bool {
-        do {
-            let person = try self.modelContext.fetch(FetchDescriptor<Person>(predicate: #Predicate { $0.id == id })).first
-            if let person {
-                return self.deletePerson(person)
-            }
-            return false
-        } catch {
-            print("Failed to delete \(id): \(error.localizedDescription)")
             return false
         }
     }
