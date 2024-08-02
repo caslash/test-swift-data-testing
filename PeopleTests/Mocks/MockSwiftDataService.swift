@@ -14,7 +14,7 @@ import SwiftData
 internal class MockSwiftDataService: ISwiftDataService {
     var people: [Person] = []
     
-    var tempPeople: [Person] = []
+    private var tempPeople: [Person] = []
     
     required init(modelContext: ModelContext) { }
     
