@@ -13,7 +13,6 @@ import Observation
 
 public class ContentViewModel {
     @ObservationIgnored @Injected(\.swiftDataService) private var swiftDataService: any ISwiftDataService
-    @ObservationIgnored @Injected(\.faker) private var faker: Faker
     
     public var people: [Person] { return swiftDataService.people }
     
@@ -21,10 +20,6 @@ public class ContentViewModel {
     
     public func addPerson(_ person: Person, completion: (_ success: Bool) -> Void) {
         completion(self.swiftDataService.addPerson(person))
-    }
-    
-    public func addPerson(completion: (_ success: Bool) -> Void) {
-        completion(self.swiftDataService.addPerson(Person(name: self.faker.name.name(), age: self.faker.number.randomInt(min: 18, max: 50))))
     }
     
     public func deletePerson(at indexSet: IndexSet, completion: (_ success: Bool) -> Void) {

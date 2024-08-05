@@ -12,8 +12,6 @@ import Foundation
 extension Container {
     var swiftDataService: Factory<any ISwiftDataService> {
         Factory(self) { SwiftDataService() }
-    }
-    var faker: Factory<Faker> {
-        Factory(self) { Faker() }
+            .singleton
     }
 }

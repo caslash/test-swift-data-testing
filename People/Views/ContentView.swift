@@ -11,6 +11,8 @@ import AlertToast
 struct ContentView: View {
     @State private var viewModel: ContentViewModel = .init()
     
+    @State private var isPresentingAddSheet: Bool = false
+    
     @State private var showToast: Bool = false
     @State private var toastTitle: String?
     @State private var successfulToast: Bool?
@@ -36,14 +38,19 @@ struct ContentView: View {
                 }
             }
             .toolbar {
-                Button{
-                    self.viewModel.addPerson { success in
-                        self.successfulToast = success
-                        self.toastTitle = success ? "Added Person" : "Couldn't add person"
-                        self.showToast = true
-                    }
+                Button {
+                    self.isPresentingAddSheet.toggle()
                 } label: {
                     Label("Add", systemImage: "plus")
+                }
+            }
+        }
+        .sheet(isPresented: self.$isPresentingAddSheet) {
+            NavigationStack {
+                AddPersonView { success in
+                    self.successfulToast = success
+                    self.toastTitle = success ? "Added Person" : "Couldn't add person"
+                    self.showToast = true
                 }
             }
         }

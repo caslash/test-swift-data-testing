@@ -12,18 +12,23 @@ import Testing
 
 struct ContentViewModelTests {
     let contentViewModel: ContentViewModel
+    let faker: Faker = .init()
     
     init() throws {
-        Container.shared.faker.register { Faker() }
+        Container.shared.reset()
         Container.shared.swiftDataService.register { MockSwiftDataService() }
         
         self.contentViewModel = ContentViewModel()
     }
 
     @Test func canFetchPeople() async throws {
+        Container.shared.reset()
+        Container.shared.swiftDataService.register { MockSwiftDataService() }
+        
         //Arrange
         for _ in 0..<3 {
-            self.contentViewModel.addPerson { _ in }
+            let person = Person(name: self.faker.name.name(), age: self.faker.number.randomInt(min: 18, max: 50))
+            self.contentViewModel.addPerson(person) { _ in }
         }
         
         //Act
@@ -35,10 +40,12 @@ struct ContentViewModelTests {
     }
     
     @Test func canAddPerson() async throws {
+        Container.shared.reset()
+        Container.shared.swiftDataService.register { MockSwiftDataService() }
+        
         //Arrange
-        let faker = Container.shared.faker.resolve()
-        let fakeName = faker.name.name()
-        let fakeAge = faker.number.randomInt(min: 18, max: 50)
+        let fakeName = self.faker.name.name()
+        let fakeAge = self.faker.number.randomInt(min: 18, max: 50)
         let person = Person(name: fakeName, age: fakeAge)
         
         //Act
@@ -53,13 +60,17 @@ struct ContentViewModelTests {
     }
     
     @Test func canDeletePerson() async throws {
+        Container.shared.reset()
+        Container.shared.swiftDataService.register { MockSwiftDataService() }
+        
         //Arrange
-        self.contentViewModel.addPerson() { _ in }
-        let person = self.contentViewModel.people.first!
+        let person = Person(name: self.faker.name.name(), age: self.faker.number.randomInt(min: 18, max: 50))
+        self.contentViewModel.addPerson(person) { _ in }
+        let firstPerson = self.contentViewModel.people.first!
         
         //Act
         var successfulResponse: Bool = false
-        self.contentViewModel.deletePerson(person) { success in successfulResponse = success }
+        self.contentViewModel.deletePerson(firstPerson) { success in successfulResponse = success }
         
         //Assert
         #expect(successfulResponse)
